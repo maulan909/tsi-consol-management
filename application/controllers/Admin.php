@@ -27,6 +27,8 @@ class Admin extends CI_Controller
                     $tgl = escapeString($row[1]);
                     $order_no = escapeString($row[2]);
                     $client_no = escapeString($row[3]);
+                    $city = escapeString($row[5]);
+                    $zone = escapeString($row[6]);
                     // if (substr($order_no,0,2) != 'JK') {
                     $this->db->where('external_order', $client_no);
                     $this->db->or_where('order_no', $order_no);
@@ -38,7 +40,9 @@ class Admin extends CI_Controller
                         if (!$ca) {
                             $this->db->insert('tb_order', [
                                 'order_no' => $order_no,
-                                'ca_no' => $client_no
+                                'ca_no' => $client_no,
+                                'city' => $city,
+                                'zone' => $zone
                             ]);
                             $insert_id = $this->db->insert_id();
                             $this->db->insert('tb_picklist', [
