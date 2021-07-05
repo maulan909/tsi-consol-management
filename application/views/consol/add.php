@@ -30,6 +30,7 @@
                 </div>
                 <div class="d-none" id="jmlPicklist"></div>
                 <div class="d-none" id="jmlKoli"></div>
+                <div class="d-none" id="kotaZona"></div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>

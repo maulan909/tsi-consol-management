@@ -71,6 +71,8 @@ class Consol_model extends CI_Model
                 $data['ca_no'] = $ext_no;
                 $data['consol'] = $picklist['consol'];
                 $data['picklist'] = $picklist['total'];
+                $data['kota'] = $picklist['kota'];
+                $data['zona'] = $picklist['zona'];
             } else if ($picklist['consol'] == 0 && $picklist['total'] > 0) {
                 $data['status'] = 'first';
                 $data['palet_no'] = null;
@@ -78,6 +80,8 @@ class Consol_model extends CI_Model
                 $data['ca_no'] = $ext_no;
                 $data['consol'] = $picklist['consol'];
                 $data['picklist'] = $picklist['total'];
+                $data['kota'] = $picklist['kota'];
+                $data['zona'] = $picklist['zona'];
             }
         }
 

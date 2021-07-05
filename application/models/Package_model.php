@@ -57,13 +57,17 @@ class Package_model extends CI_Model
             $data = [
                 'total' => $picklist,
                 'consol' => $consol,
-                'kekurangan' => ($picklist - $consol)
+                'kekurangan' => ($picklist - $consol),
+                'kota' => $order['city'],
+                'zona' => $order['zone']
             ];
         } else {
             $data = [
                 'total' => 'n/a',
                 'consol' => 'n/a',
-                'kekurangan' => 'n/a'
+                'kekurangan' => 'n/a',
+                'kota' => 'n/a',
+                'zona' => 'n/a'
             ];
         }
 
@@ -120,7 +124,7 @@ class Package_model extends CI_Model
     {
         $settings = $this->db->get('settings')->row_array();
         $jadwal_backup = $settings['jadwal_backup'];
-        
+
         $data = $this->package->getAllMovedBak();
         foreach ($data as $dat) {
             if (((60 * 60 * 24 * $jadwal_backup) + $dat['update_time']) < time()) {
