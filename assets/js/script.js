@@ -53,13 +53,13 @@ $(document).ready(function () {
                             text: "Ada indikasi kelebihan barang di Nomor CA yang anda input!",
                             buttons: ["Batal", "OK"],
                         })
-                            .then((willCheck) => {
-                                if (willCheck) {
-                                    window.open(url + 'package/moved#search=' + encodeURI(caNo), "_self");
-                                } else {
-                                    window.open(url + 'package/moved#search=' + encodeURI(caNo), "_self");
-                                }
-                            });
+                        .then((willCheck) => {
+                            if (willCheck) {
+                                window.open(url + 'package/moved#search=' + encodeURI(caNo), "_self");
+                            } else {
+                                window.open(url + 'package/moved#search=' + encodeURI(caNo), "_self");
+                            }
+                        });
                     } else if (data.status == 'full') {
                         swal({
                             title: "Nomor CA ini sudah lengkap dan berada di Palet No " + data.palet_no,
@@ -67,13 +67,13 @@ $(document).ready(function () {
                             text: "Ada indikasi kelebihan barang di Nomor CA yang anda input!",
                             buttons: ["Batal", "Cek"]
                         })
-                            .then((willCheck) => {
-                                if (willCheck) {
-                                    window.open(url + 'package/readytomove#search=' + encodeURI(caNo), "_self");
-                                } else {
-                                    window.open(url + 'package/readytomove#search=' + encodeURI(caNo), "_self");
-                                }
-                            });
+                        .then((willCheck) => {
+                            if (willCheck) {
+                                window.open(url + 'package/readytomove#search=' + encodeURI(caNo), "_self");
+                            } else {
+                                window.open(url + 'package/readytomove#search=' + encodeURI(caNo), "_self");
+                            }
+                        });
                     } else if (data.status == 'done') {
                         swal({
                             title: "Nomor CA ini sudah di dikirim !",
@@ -81,15 +81,16 @@ $(document).ready(function () {
                             text: "Ada indikasi kelebihan barang di Nomor CA yang anda input!",
                             buttons: ["Batal", "OK"],
                         })
-                            .then((willCheck) => {
-                                if (willCheck) {
-                                    window.open(url + "package/history", "_self");
-                                } else {
-                                    window.open(url + "package/history", "_self");
-                                }
-                            });
+                        .then((willCheck) => {
+                            if (willCheck) {
+                                window.open(url + "package/history", "_self");
+                            } else {
+                                window.open(url + "package/history", "_self");
+                            }
+                        });
                     }
                 } else {
+                    $('#kotaZona').attr('class', 'd-none');
                     $('#jmlPicklist').attr('class', 'd-none');
                     $('#jmlKoli').attr('class', 'd-none');
                 }
