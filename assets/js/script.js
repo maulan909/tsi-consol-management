@@ -34,14 +34,18 @@ $(document).ready(function () {
                     if (data.status == 'first') {
                         $('#jmlPicklist').attr('class', 'alert alert-primary').html('Picklist ke : ' + (data.consol + 1) + ' dari ' + data.picklist + ' Picklist');
                         $('#jmlKoli').attr('class', 'alert alert-primary').html('Total Koli Sebelumnya: ' + (data.koli) + ' Koli');
-                        $('#kotaZona').attr('class', 'alert alert-primary').html('Tujuan : ' + (data.kota) + ' | ' + (data.zona));
+                        if(data.zona != ''){
+                            $('#kotaZona').attr('class', 'alert alert-primary').html('Tujuan : ' + (data.kota) + ' | ' + (data.zona));
+                        }
                     } else if (data.status == 'part') {
                         $('#ca_no').attr('readonly', '');
                         $('#palet_no').val(data.palet_no);
                         $('#palet_no').attr('readonly', '');
                         $('#jmlPicklist').attr('class', 'alert alert-primary').html('Picklist ke : ' + (data.consol + 1) + ' dari ' + data.picklist + ' Picklist');
                         $('#jmlKoli').attr('class', 'alert alert-primary').html('Total Koli Sebelumnya: ' + (data.koli) + ' Koli');
-                        $('#kotaZona').attr('class', 'alert alert-primary').html('Tujuan : ' + (data.kota) + ' | ' + (data.zona));
+                        if(data.zona != ''){
+                            $('#kotaZona').attr('class', 'alert alert-primary').html('Tujuan : ' + (data.kota) + ' | ' + (data.zona));
+                        }
                     } else if (data.status == 'moved') {
                         swal({
                             title: "Nomor CA ini sudah di Pindah Ke Zona Pengiriman ",
