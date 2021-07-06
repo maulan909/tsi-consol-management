@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'tsi2',
+	'hostname' => 'localhost:3306',
+	'username' => 'tsia1257_evos',
+	'password' => 'tanihub123',
+	'database' => 'tsia1257_tsi',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
