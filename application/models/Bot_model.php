@@ -14,4 +14,9 @@ class Bot_model extends CI_Model
             $this->db->insert($this->_table, ['chat_id' => $id]);
         }
     }
+
+    public function getAllChatId()
+    {
+        return $this->db->get($this->_table)->result_array();
+    }
 }
