@@ -25,7 +25,14 @@ class Bot extends CI_Controller
         } else if (strpos($message, "//") === 0) {
             if (count_chars($message) > 2) {
                 $consol = $this->consol->searchItemConsol(substr($message, 1));
-                $reply = "silahkan masukkan nomor CA " . $consol['ca_no'];
+                $status = $consol === 1 ? 'Moved' : 'Consol Staging';
+                $picklist = $this->package->getTotalPicklist($consol['ca_no']);
+                $koli = $this->package->getTotalKoli($consol['ca_no']);
+                $reply = "Result : \n
+                            External No : " . $consol['ca_no'] . "\n
+                            Total Kelengkapan Picklist : " . $picklist['consol'] . " dari " . $picklist['total'] . " Picklist \n
+                            Total Koli : " . $koli['dry'] . " Dry & " . $koli['frozen'] . " Frozen \n
+                            Status : " . $status;
             }
         }
         file_get_contents($apiURL . "/sendmessage?chat_id=" . $chatID . "&text=" . $reply . "&parse_mode=HTML");
