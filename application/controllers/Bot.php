@@ -25,16 +25,25 @@ class Bot extends CI_Controller
         } else if (strpos($message, "//") === 0) {
             if (count_chars($message) > 2) {
                 $consol = $this->consol->searchItemConsol(substr($message, 1));
-                $status = $consol === 1 ? 'Moved' : 'Consol Staging';
-                $picklist = $this->package->getTotalPicklist($consol['ca_no']);
-                $koli = $this->package->getTotalKoli($consol['ca_no']);
-                $reply = "Result : \n
-                            External No : " . $consol['ca_no'] . "\n
-                            Total Kelengkapan Picklist : " . $picklist['consol'] . " dari " . $picklist['total'] . " Picklist \n
-                            Total Koli : " . $koli['dry'] . " Dry & " . $koli['frozen'] . " Frozen \n
-                            Status : " . $status;
+                if ($consol) {
+                    $picklist = $this->package->getTotalPicklist($consol['ca_no']);
+                    $koli = $this->package->getTotalKoli($consol['ca_no']);
+                    if ($consol['status'] === 1) {
+                        $status = 'Moved';
+                        $zona = 'Tujuan : ' . $picklist['kota'] . ' | ' . $picklist['zona'];
+                    } else {
+                        $status = 'Consol Staging';
+                        $zona = 'Staging : ' . $consol['palet_no'];
+                    }
+                    $reply = "Result : \nExternal No : " . $consol['ca_no'] . "\nTotal Kelengkapan Picklist : " . $picklist['consol'] . " dari " . $picklist['total'] . " Picklist \nTotal Koli : " . $koli['dry'] . " Dry & " . $koli['frozen'] . " Frozen \nStatus : " . $status . "\n" . $zona;
+                } else {
+                    $order = $this->db->get_where('tb_order', ['ca_no' => substr($message, 1)]);
+                    $picklist = $this->package->getTotalPicklist($order['ca_no']);
+                    $koli = $this->package->getTotalKoli($order['ca_no']);
+                    $reply = "Result : \nExternal No : " . $order['ca_no'] . "\nTotal Kelengkapan Picklist : " . $picklist['consol'] . " dari " . $picklist['total'] . " Picklist";
+                }
             }
         }
-        file_get_contents($apiURL . "/sendmessage?chat_id=" . $chatID . "&text=" . $reply . "&parse_mode=HTML");
+        file_get_contents($apiURL . "/sendmessage?chat_id=" . $chatID . "&text=" . urlencode($reply) . "&parse_mode=HTML");
     }
 }

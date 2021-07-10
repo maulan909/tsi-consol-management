@@ -42,9 +42,17 @@ class Consol extends CI_Controller
                     $this->load->view('templates/footer');
                     $this->load->view('consol/alert', $data);
                 } else {
+                    $send = completeCheck($this->input->post('ca_no'));
+                    if ($send) {
+                        senderBot($this->input->post('ca_no'));
+                    }
                     redirect('consol/add');
                 }
             } else {
+                $send = completeCheck($this->input->post('ca_no'));
+                if ($send) {
+                    senderBot($this->input->post('ca_no'));
+                }
                 redirect('consol/add');
             }
         } else {

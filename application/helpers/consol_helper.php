@@ -35,6 +35,35 @@ function check_access($role_id, $menu_id)
     }
 }
 
+function completeCheck($ext)
+{
+    $ci = get_instance();
+    $ci->load->model('Package_model', 'package');
+    $picklist = $ci->package->getTotalPicklist($ext);
+    $hasil = false;
+    if ($picklist['total'] - $picklist['consol'] === 0) {
+        $hasil = true;
+    }
+    return $hasil;
+}
+
+function senderBot($data)
+{
+    $ci = get_instance();
+    $ci->load->model('Package_model', 'package');
+    $ci->load->model('Bot_model', 'bot');
+    $token = "1828680774:AAHIebWcJiKBt0MxpzyWHZheb3ynqDsvFGI";
+    $apiURL = "https://api.telegram.org/bot$token";
+    $reply = "";
+    $picklist = $ci->package->getTotalPicklist($data);
+    $koli = $ci->package->getTotalKoli($data);
+    $reply .= "Complete Package : \nExternal No : " . $data . "\nKelengkapan Picklist : " . $picklist['consol'] . 'dari ' . $picklist['total'] . " Picklist\n Total Koli : " . $koli['dry'] . " Dry & " . $koli['frozen'] . " Frozen\n Staging : " . $ci->package->getLocation($data) . "\nTujuan : " . $picklist['kota'] . " | " . $picklist['zona'];
+    $target = $ci->bot->getAllChatId();
+    foreach ($target as $to) {
+        file_get_contents($apiURL . "/sendmessage?chat_id=" . $to['chat_id'] . "&text=" . urlencode($reply) . "&parse_mode=HTML");
+    }
+}
+
 function escapeString($val)
 {
     $db = get_instance()->db->conn_id;
