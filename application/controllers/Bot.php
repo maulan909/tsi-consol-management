@@ -9,6 +9,7 @@ class Bot extends CI_Controller
         parent::__construct();
         $this->load->model('Package_model', 'package');
         $this->load->model('Consol_model', 'consol');
+        $this->load->model('Bot_model', 'bot');
     }
     public function index()
     {
@@ -19,8 +20,9 @@ class Bot extends CI_Controller
         $message = $update["message"]["text"];
 
         if (strpos($message, "/start") === 0) {
-
-            file_get_contents($apiURL . "/sendmessage?chat_id=" . $chatID . "&text=" . $chatID . "&parse_mode=HTML");
+            $this->bot->insertChatId($chatID);
+            $reply = "Bot Consol Siap digunakan!";
+            file_get_contents($apiURL . "/sendmessage?chat_id=" . $chatID . "&text=" . $reply . "&parse_mode=HTML");
         }
     }
 }
