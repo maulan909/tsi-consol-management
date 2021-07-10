@@ -23,7 +23,10 @@ class Bot extends CI_Controller
             $this->bot->insertChatId($chatID);
             $reply = "Bot Consol Siap digunakan!";
         } else if (strpos($message, "//") === 0) {
-            $reply = "silahkan masukkan nomor CA";
+            if (count_chars($message) > 2) {
+                $consol = $this->consol->searchItemConsol(substr($message, 1));
+                $reply = "silahkan masukkan nomor CA " . $consol['ca_no'];
+            }
         }
         file_get_contents($apiURL . "/sendmessage?chat_id=" . $chatID . "&text=" . $reply . "&parse_mode=HTML");
     }

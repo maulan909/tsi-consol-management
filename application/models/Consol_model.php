@@ -175,4 +175,9 @@ class Consol_model extends CI_Model
         }
         return $data;
     }
+    public function searchItemConsol($kode)
+    {
+        $this->db->like('ca_no', $kode, 'before');
+        return $this->db->get($this->_table)->row_array();
+    }
 }
