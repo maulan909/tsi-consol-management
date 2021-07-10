@@ -14,7 +14,7 @@ class Bot extends CI_Controller
 
         if (strpos($message, "/start") === 0) {
 
-            file_get_contents($apiURL . "/sendmessage?chat_id=" . $chatID . "&text=Haloo, test webhooks dicoffeean.com.&parse_mode=HTML");
+            file_get_contents($apiURL . "/sendmessage?chat_id=" . $chatID . "&text=" . $message . "&parse_mode=HTML");
         }
     }
 }
