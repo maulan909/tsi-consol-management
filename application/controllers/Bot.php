@@ -28,7 +28,7 @@ class Bot extends CI_Controller
                 if ($consol) {
                     $picklist = $this->package->getTotalPicklist($consol['ca_no']);
                     $koli = $this->package->getTotalKoli($consol['ca_no']);
-                    if ($consol['status'] === 1) {
+                    if ($consol['status'] == 1) {
                         $status = 'Moved';
                         $zona = 'Tujuan : ' . $picklist['kota'] . ' | ' . $picklist['zona'];
                     } else {
