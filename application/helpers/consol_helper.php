@@ -57,7 +57,7 @@ function senderBot($data)
     $reply = "";
     $picklist = $ci->package->getTotalPicklist($data);
     $koli = $ci->package->getTotalKoli($data);
-    $reply .= "Complete Package : \nExternal No : " . $data . "\nKelengkapan Picklist : " . $picklist['consol'] . 'dari ' . $picklist['total'] . " Picklist\nTotal Koli : " . $koli['dry'] . " Dry & " . $koli['frozen'] . " Frozen\nStaging : " . $ci->package->getLocation($data) . "\nTujuan : " . $picklist['kota'] . " | " . $picklist['zona'];
+    $reply .= "Complete Package : \nExternal No : " . $data . "\nKelengkapan Picklist : " . $picklist['consol'] . ' dari ' . $picklist['total'] . " Picklist\nTotal Koli : " . $koli['dry'] . " Dry/Fresh & " . $koli['frozen'] . " Frozen/Chiller\nStaging : " . $ci->package->getLocation($data) . "\nTujuan : " . $picklist['kota'] . " | " . $picklist['zona'];
     $target = $ci->bot->getAllChatId();
     foreach ($target as $to) {
         file_get_contents($apiURL . "/sendmessage?chat_id=" . $to['chat_id'] . "&text=" . urlencode($reply) . "&parse_mode=HTML");
