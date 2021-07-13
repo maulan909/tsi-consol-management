@@ -52,12 +52,14 @@ function senderBot($data)
     $ci = get_instance();
     $ci->load->model('Package_model', 'package');
     $ci->load->model('Bot_model', 'bot');
-    $token = "1828680774:AAHIebWcJiKBt0MxpzyWHZheb3ynqDsvFGI";
+    $ci->load->model('Additional_model', 'additonal');
+    $setting = $ci->additional->getDataSettings();
+    $token = $setting['token_bot'];
     $apiURL = "https://api.telegram.org/bot$token";
     $reply = "";
     $picklist = $ci->package->getTotalPicklist($data);
     $koli = $ci->package->getTotalKoli($data);
-    $reply .= "Complete Package : \nExternal No : " . $data . "\nKelengkapan Picklist : " . $picklist['consol'] . ' dari ' . $picklist['total'] . " Picklist\nTotal Koli : " . $koli['dry'] . " Dry/Fresh & " . $koli['frozen'] . " Frozen/Chiller\nStaging : " . $ci->package->getLocation($data) . "\nTujuan : " . $picklist['kota'] . " | " . $picklist['zona'];
+    $reply .= "Complete Package : \nExternal No : " . strtoupper($data) . "\nKelengkapan Picklist : " . $picklist['consol'] . ' dari ' . $picklist['total'] . " Picklist\nTotal Koli : " . $koli['dry'] . " Dry/Fresh & " . $koli['frozen'] . " Frozen/Chiller\nStaging : " . $ci->package->getLocation($data) . "\nTujuan : " . $picklist['kota'] . " | " . $picklist['zona'] . "\nLast Scanner : " . $ci->session->userdata('username');
     $target = $ci->bot->getAllChatId();
     foreach ($target as $to) {
         file_get_contents($apiURL . "/sendmessage?chat_id=" . $to['chat_id'] . "&text=" . urlencode($reply) . "&parse_mode=HTML");
