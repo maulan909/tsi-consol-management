@@ -27,7 +27,7 @@ class Bot extends CI_Controller
         } else if (strpos($message, "//") === 0) {
             if (count_chars($message) > 2) {
                 $this->db->like('external_order', strtoupper(substr($message, 1)), 'before');
-                $history = $this->db->get('tb_consol')->row_array();
+                $history = $this->db->get('tb_history')->row_array();
                 if ($history !== null) {
                     $reply = "Result : " . $history['external_order'] . "\nTotal Picklist : " . $history['total_picklist'] . " Picklist \nTotal Koli : " . $history['total_koli'] . " Koli \nStatus : Moved to history \nDate : " . date('H:m:s d/m/Y', $history['move_date']);
                 } else {
