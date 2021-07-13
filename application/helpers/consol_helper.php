@@ -41,8 +41,10 @@ function completeCheck($ext)
     $ci->load->model('Package_model', 'package');
     $picklist = $ci->package->getTotalPicklist($ext);
     $hasil = false;
-    if ($picklist['total'] - $picklist['consol'] === 0) {
-        $hasil = true;
+    if ($picklist['total'] !== 'n/a') {
+        if ($picklist['total'] - $picklist['consol'] === 0) {
+            $hasil = true;
+        }
     }
     return $hasil;
 }
@@ -52,7 +54,7 @@ function senderBot($data)
     $ci = get_instance();
     $ci->load->model('Package_model', 'package');
     $ci->load->model('Bot_model', 'bot');
-    $ci->load->model('Additional_model', 'additonal');
+    $ci->load->model('Additional_model', 'additional');
     $setting = $ci->additional->getDataSettings();
     $token = $setting['token_bot'];
     $apiURL = "https://api.telegram.org/bot$token";

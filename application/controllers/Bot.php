@@ -49,7 +49,7 @@ class Bot extends CI_Controller
                         }
                     } else {
                         $this->db->like('ca_no', strtoupper(substr($message, 1)), 'before');
-                        $order = $this->db->get('tb_order')->result_array();
+                        $order = $this->db->get('tb_order')->row_array();
                         $picklist = $this->package->getTotalPicklist($order['ca_no']);
                         $koli = $this->package->getTotalKoli($order['ca_no']);
                         $reply = "Result : \nExternal No : " . $order['ca_no'] . "\nTotal Kelengkapan Picklist : " . $picklist['consol'] . " dari " . $picklist['total'] . " Picklist";

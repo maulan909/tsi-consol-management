@@ -56,32 +56,34 @@ class Consol_model extends CI_Model
             // $this->db->where('ca_no', $ext_no);
             $consol = $this->db->query("SELECT palet_no, status, (SELECT SUM(koli) FROM tb_consol WHERE ca_no = '$ext_no') as koli FROM tb_consol WHERE ca_no =  '$ext_no'")->row_array();
             $picklist = $this->package->getTotalPicklist($ext_no);
-            if ($consol) {
-                if ($consol['status'] == 1) {
-                    $data['status'] = 'moved';
-                } else {
-                    if ($picklist['consol'] == $picklist['total']) {
-                        $data['status'] = 'full';
+            if ($picklist['total'] !== 'n/a') {
+                if ($consol) {
+                    if ($consol['status'] == 1) {
+                        $data['status'] = 'moved';
                     } else {
-                        $data['status'] = 'part';
+                        if ($picklist['consol'] == $picklist['total']) {
+                            $data['status'] = 'full';
+                        } else {
+                            $data['status'] = 'part';
+                        }
                     }
+                    $data['palet_no'] = $consol['palet_no'];
+                    $data['koli'] = $consol['koli'];
+                    $data['ca_no'] = $ext_no;
+                    $data['consol'] = $picklist['consol'];
+                    $data['picklist'] = $picklist['total'];
+                    $data['kota'] = $picklist['kota'];
+                    $data['zona'] = $picklist['zona'];
+                } else if ($picklist['consol'] == 0 && $picklist['total'] > 0) {
+                    $data['status'] = 'first';
+                    $data['palet_no'] = null;
+                    $data['koli'] = 0;
+                    $data['ca_no'] = $ext_no;
+                    $data['consol'] = $picklist['consol'];
+                    $data['picklist'] = $picklist['total'];
+                    $data['kota'] = $picklist['kota'];
+                    $data['zona'] = $picklist['zona'];
                 }
-                $data['palet_no'] = $consol['palet_no'];
-                $data['koli'] = $consol['koli'];
-                $data['ca_no'] = $ext_no;
-                $data['consol'] = $picklist['consol'];
-                $data['picklist'] = $picklist['total'];
-                $data['kota'] = $picklist['kota'];
-                $data['zona'] = $picklist['zona'];
-            } else if ($picklist['consol'] == 0 && $picklist['total'] > 0) {
-                $data['status'] = 'first';
-                $data['palet_no'] = null;
-                $data['koli'] = 0;
-                $data['ca_no'] = $ext_no;
-                $data['consol'] = $picklist['consol'];
-                $data['picklist'] = $picklist['total'];
-                $data['kota'] = $picklist['kota'];
-                $data['zona'] = $picklist['zona'];
             }
         }
 

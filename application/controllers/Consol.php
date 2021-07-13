@@ -32,6 +32,10 @@ class Consol extends CI_Controller
             $this->session->set_flashdata('messages', '<div class="alert alert-success">Input data berhasil</div>');
             $this->load->model('Package_model', 'package');
             $picklist = $this->package->getTotalPicklist($this->input->post('ca_no'));
+            $send = completeCheck($this->input->post('ca_no'));
+            if ($send) {
+                senderBot($this->input->post('ca_no'));
+            }
             if ($picklist) {
                 if ($picklist['total'] == 1) {
                     $data['title'] = 'Dashboard';
@@ -42,17 +46,9 @@ class Consol extends CI_Controller
                     $this->load->view('templates/footer');
                     $this->load->view('consol/alert', $data);
                 } else {
-                    $send = completeCheck($this->input->post('ca_no'));
-                    if ($send) {
-                        senderBot($this->input->post('ca_no'));
-                    }
                     redirect('consol/add');
                 }
             } else {
-                $send = completeCheck($this->input->post('ca_no'));
-                if ($send) {
-                    senderBot($this->input->post('ca_no'));
-                }
                 redirect('consol/add');
             }
         } else {
