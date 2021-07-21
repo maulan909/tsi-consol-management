@@ -6,6 +6,8 @@
     <div class="row mt-3">
         <div class="col-lg-6">
             <form action="<?= base_url('consol/add'); ?>" method="post">
+                <input type="hidden" id="picklist_ke" name="picklist_ke">
+                <input type="hidden" id="total_picklist" name="total_picklist">
                 <div class="form-group">
                     <label for="ca_no">External Order No</label>
                     <input type="text" class="form-control" id="ca_no" name="ca_no" placeholder="External Order No" value="<?= set_value('ca_no'); ?>" autocomplete="off" required>

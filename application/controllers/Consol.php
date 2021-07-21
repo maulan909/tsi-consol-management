@@ -32,7 +32,7 @@ class Consol extends CI_Controller
             $this->session->set_flashdata('messages', '<div class="alert alert-success">Input data berhasil</div>');
             $this->load->model('Package_model', 'package');
             $picklist = $this->package->getTotalPicklist($this->input->post('ca_no'));
-            $send = completeCheck($this->input->post('ca_no'));
+            $send = completeCheck($this->input->post('picklist_ke'), $this->input->post('total_picklist'));
             if ($send) {
                 senderBot($this->input->post('ca_no'));
             }

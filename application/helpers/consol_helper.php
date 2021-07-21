@@ -35,16 +35,11 @@ function check_access($role_id, $menu_id)
     }
 }
 
-function completeCheck($ext)
+function completeCheck($consol, $picklist)
 {
-    $ci = get_instance();
-    $ci->load->model('Package_model', 'package');
-    $picklist = $ci->package->getTotalPicklist($ext);
     $hasil = false;
-    if ($picklist['total'] !== 'n/a') {
-        if ($picklist['total'] - $picklist['consol'] === 0) {
-            $hasil = true;
-        }
+    if ($consol == $picklist) {
+        $hasil = true;
     }
     return $hasil;
 }
