@@ -13,9 +13,24 @@ class Package extends CI_Controller
     }
     public function index()
     {
+        $this->load->library('pagination');
         $data['title'] = 'Waiting Package';
         $data['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-        $data['orders'] = $this->db->get('tb_order')->result_array();
+        if ($this->input->post('submit')) {
+            $data['keywait'] = $this->input->post('waitsearch');
+            $this->session->set_userdata('keywait', $data['keywait']);
+        } else {
+            $data['keywait'] = $this->session->userdata('keywait');
+        }
+        $config['base_url'] = base_url('package/index');
+        $this->db->like('ca_no', $data['keywait']);
+        $this->db->from('tb_order');
+        $config['total_rows'] = $this->db->count_all_results();
+        $config['per_page'] = 10;
+
+        $this->pagination->initialize($config);
+        $data['start'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['orders'] = $this->package->getWaitList($config['per_page'], $data['start'], $data['keywait']);
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('package/waiting', $data);

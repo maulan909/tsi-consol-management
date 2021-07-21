@@ -3,6 +3,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Package_model extends CI_Model
 {
+    public function getWaitList($limit, $start, $keyword)
+    {
+        $this->db->order_by('ca_no', 'ASC');
+        if ($keyword != null) {
+            $this->db->like('ca_no', $keyword);
+        }
+        return $this->db->get('tb_order', $limit, $start)->result_array();
+    }
     public function getReadyToMove()
     {
         $consol = $this->db->query('SELECT DISTINCT ca_no FROM tb_consol WHERE status = 0')->result_array();
