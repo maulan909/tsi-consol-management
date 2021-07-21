@@ -64,7 +64,19 @@ function senderBot($data)
     $reply .= "Complete Package : \nExternal No : " . strtoupper($data) . "\nKelengkapan Picklist : " . $picklist['consol'] . ' dari ' . $picklist['total'] . " Picklist\nTotal Koli : " . $koli['dry'] . " Dry/Fresh & " . $koli['frozen'] . " Frozen/Chiller\nStaging : " . $ci->package->getLocation($data) . "\nTujuan : " . $picklist['kota'] . " | " . $picklist['zona'] . "\nLast Scanner : " . $ci->session->userdata('username');
     $target = $ci->bot->getAllChatId();
     foreach ($target as $to) {
-        file_get_contents($apiURL . "/sendmessage?chat_id=" . $to['chat_id'] . "&text=" . urlencode($reply) . "&parse_mode=HTML");
+        $curl_handle = curl_init();
+        curl_setopt($curl_handle, CURLOPT_URL, $apiURL . "/sendChatAction?chat_id=" . $to['chat_id'] . "&action=typing");
+        curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+        curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
+        $status = json_decode(curl_exec($curl_handle), TRUE);
+        curl_close($curl_handle);
+        // $status = file_get_contents($apiURL . "/sendChatAction?chat_id=" . urlencode($to['chat_id']) . "&action=typing");
+        if ($status['ok']) {
+            file_get_contents($apiURL . "/sendmessage?chat_id=" . urlencode($to['chat_id']) . "&text=" . urlencode($reply) . "&parse_mode=HTML");
+        } else {
+            $ci->db->delete('bot_user', ['chat_id' => $to['chat_id']]);
+        }
     }
 }
 
