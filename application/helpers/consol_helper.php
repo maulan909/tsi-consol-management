@@ -68,17 +68,12 @@ function senderBot($data)
         curl_setopt($curl_handle, CURLOPT_URL, $apiURL . "/sendChatAction?chat_id=" . $to['chat_id'] . "&action=typing");
         curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
         curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl_handle, CURLOPT_USERAGENT, 'TSI Build Consol');
+        curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
         $status = json_decode(curl_exec($curl_handle), TRUE);
         curl_close($curl_handle);
         // $status = file_get_contents($apiURL . "/sendChatAction?chat_id=" . urlencode($to['chat_id']) . "&action=typing");
         if ($status['ok']) {
-            $curlsend = curl_init();
-            curl_setopt($curlsend, CURLOPT_URL, $apiURL . "/sendmessage?chat_id=" . urlencode($to['chat_id']) . "&text=" . urlencode($reply) . "&parse_mode=HTML");
-            curl_setopt($curlsend, CURLOPT_CONNECTTIMEOUT, 2);
-            curl_setopt($curlsend, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($curlsend, CURLOPT_USERAGENT, 'TSI Build Consol');
-            curl_close($curlsend);
+            file_get_contents($apiURL . "/sendmessage?chat_id=" . urlencode($to['chat_id']) . "&text=" . urlencode($reply) . "&parse_mode=HTML");
         } else {
             $ci->db->delete('bot_user', ['chat_id' => $to['chat_id']]);
         }
