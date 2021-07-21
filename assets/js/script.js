@@ -34,6 +34,8 @@ $(document).ready(function () {
                     if (data.status == 'first') {
                         $('#jmlPicklist').attr('class', 'alert alert-primary').html('Picklist ke : ' + (data.consol + 1) + ' dari ' + data.picklist + ' Picklist');
                         $('#jmlKoli').attr('class', 'alert alert-primary').html('Total Koli Sebelumnya: ' + (data.koli) + ' Koli');
+                        $('#picklist_ke').val(data.consol+1);
+                        $('#total_picklist').val(data.picklist);
                         if(data.zona != ''){
                             $('#kotaZona').attr('class', 'h4 font-weight-bold alert alert-primary').html('Tujuan : ' + (data.kota) + ' | ' + (data.zona));
                         }
@@ -43,6 +45,8 @@ $(document).ready(function () {
                         $('#palet_no').attr('readonly', '');
                         $('#jmlPicklist').attr('class', 'alert alert-primary').html('Picklist ke : ' + (data.consol + 1) + ' dari ' + data.picklist + ' Picklist');
                         $('#jmlKoli').attr('class', 'alert alert-primary').html('Total Koli Sebelumnya: ' + (data.koli) + ' Koli');
+                        $('#picklist_ke').val(data.consol+1);
+                        $('#total_picklist').val(data.picklist);
                         if(data.zona != ''){
                             $('#kotaZona').attr('class', 'h4 font-weight-bold alert alert-primary').html('Tujuan : ' + (data.kota) + ' | ' + (data.zona));
                         }
@@ -93,6 +97,8 @@ $(document).ready(function () {
                     $('#kotaZona').attr('class', 'd-none');
                     $('#jmlPicklist').attr('class', 'd-none');
                     $('#jmlKoli').attr('class', 'd-none');
+                    $('#picklist_ke').val('');
+                    $('#total_picklist').val('');
                 }
             }
         });
