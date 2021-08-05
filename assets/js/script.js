@@ -1,7 +1,9 @@
 $(document).ready(function () {
     var pdf = {};
+    //ajax location
     $("#palet_no").on('keyup', function () {
         var locInput = $(this).val();
+        pdf.palet_no = locInput;
         $.ajax({
             url: url + 'consol/get',
             method: 'post',
@@ -20,10 +22,8 @@ $(document).ready(function () {
         });
     });
 
-    //ajax location
     $("#ca_no").on('keyup', function () {
         var caNo = $(this).val();
-
         $.ajax({
             url: url + 'consol/get',
             method: 'post',
@@ -100,6 +100,7 @@ $(document).ready(function () {
                     $('#jmlKoli').attr('class', 'd-none');
                     $('#picklist_ke').val('');
                     $('#total_picklist').val('');
+                    pdf.ca_no = caNo;
                 }
             }
         });

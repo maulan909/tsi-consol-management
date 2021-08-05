@@ -71,14 +71,14 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="picklist">PL ke <?= $detail['consol'] + 1; ?> / <?= $detail['picklist']; ?></div>
+            <div class="picklist">PL ke <?php echo (isset($detail['consol'])) ? $detail['consol'] + 1 : 'undetected';  ?> / <?php echo (isset($detail['picklist'])) ? $detail['picklist'] : 'undetected';  ?></div>
             <div class="koli">
-                <span class="text">Loc P : <?= $detail['palet_no']; ?></span>
-                <span class="text">Loc F : <?= $detail['palet_no']; ?></span>
+                <span class="text">Loc P : <?php echo (isset($detail['palet_no'])) ? $detail['palet_no'] : '';  ?></span>
+                <span class="text">Loc F : <?php echo (isset($detail['palet_no'])) ? $detail['palet_no'] : '';  ?></span>
             </div>
         </div>
         <div class="hero">
-            <h3><?= $detail['kota'] ?></h3>
+            <h3><?php echo (isset($detail['kota'])) ? $detail['kota'] : '';  ?></h3>
         </div>
         <div class="body">
             <div class="heading">FROZEN</div>
@@ -88,7 +88,7 @@
             <div class="text right">Q : <?= $detail['current']; ?> Koli</div>
         </div>
     </div>
-    <!-- <?php var_dump($detail); ?> -->
+    <?php var_dump($detail); ?>
 </body>
 
 </html>
