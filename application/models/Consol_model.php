@@ -55,6 +55,7 @@ class Consol_model extends CI_Model
         } else {
             // $this->db->where('ca_no', $ext_no);
             $consol = $this->db->query("SELECT palet_no, status, (SELECT SUM(koli) FROM tb_consol WHERE ca_no = '$ext_no') as koli FROM tb_consol WHERE ca_no =  '$ext_no'")->row_array();
+            $koliByType = $this->package->getTotalKoli($ext_no);
             $picklist = $this->package->getTotalPicklist($ext_no);
             if ($picklist['total'] !== 'n/a') {
                 if ($consol) {
@@ -69,6 +70,8 @@ class Consol_model extends CI_Model
                     }
                     $data['palet_no'] = $consol['palet_no'];
                     $data['koli'] = $consol['koli'];
+                    $data['frozen'] = $koliByType['frozen'];
+                    $data['dry'] = $koliByType['dry'];
                     $data['ca_no'] = $ext_no;
                     $data['consol'] = $picklist['consol'];
                     $data['picklist'] = $picklist['total'];

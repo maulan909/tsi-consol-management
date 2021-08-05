@@ -2,7 +2,12 @@
 
     <!-- Page Heading -->
     <?= $this->session->flashdata('messages'); ?>
-    <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
+        <div class="collapse" id="pdfCollapse">
+            <button id="generatePDF" data-link="<?= base_url('pdfview/index/frozen_ticket'); ?>" class="btn btn-primary"><i class="fa fa-print"></i> Frozen Ticket</button>
+        </div>
+    </div>
     <div class="row mt-3">
         <div class="col-lg-6">
             <form action="<?= base_url('consol/add'); ?>" method="post">
@@ -20,7 +25,7 @@
                     <small class="d-none" id="suggested"></small>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="1" id="remarks" name="remarks">
+                    <input class="form-check-input" type="checkbox" data-toggle="collapse" data-target="#pdfCollapse" value="1" id="remarks" name="remarks">
                     <label class="form-check-label" for="remarks">
                         Frozen / Chiller
                     </label>
@@ -40,3 +45,6 @@
         </div>
     </div>
 </div>
+<script>
+
+</script>

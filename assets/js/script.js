@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    var pdf = {};
     $("#palet_no").on('keyup', function () {
         var locInput = $(this).val();
         $.ajax({
@@ -93,6 +93,7 @@ $(document).ready(function () {
                             }
                         });
                     }
+                    pdf = data;
                 } else {
                     $('#kotaZona').attr('class', 'd-none');
                     $('#jmlPicklist').attr('class', 'd-none');
@@ -103,6 +104,13 @@ $(document).ready(function () {
             }
         });
     });
+    
+    //pdf generate
+    $('#generatePDF').on('click',function(){
+        pdf.current = $('#koli').val();
+        console.log(pdf);
+        window.open($(this).data('link') + "?data=" + encodeURIComponent(JSON.stringify(pdf)),'popupWindow', 'width=600, heigth=600, scrollbar=yes');
+    })
 
     //confirm delete item consol
     $('#dataTable').on('click', '.delCons', function () {
@@ -314,6 +322,7 @@ $(document).ready(function () {
         if ((event.which < 48 || event.which > 57)) {
             event.preventDefault();
         }
+        pdf.current = $(this).val();
     });
     $.ajax({
         url: url + 'package/check',
