@@ -88,7 +88,6 @@
             <div class="text right">Q : <?= $detail['current']; ?> Koli</div>
         </div>
     </div>
-    <?php var_dump($detail); ?>
 </body>
 
 </html>
