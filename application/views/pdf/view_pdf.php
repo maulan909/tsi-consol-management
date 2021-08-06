@@ -70,7 +70,9 @@
     </style>
 </head>
 <?php
-$external = explode('/', $detail['ca_no']);
+if (isset($detail['ca_no'])) {
+    $external = explode('/', $detail['ca_no']);
+}
 if (strlen(end($external)) === 4) {
     $tipe = "CA";
 }
@@ -98,7 +100,7 @@ if (strlen(end($external)) === 4) {
                 if (isset($tipe) && $tipe === "CA") {
                     echo $external[0] . "/" . $external[1] . "/" . $external[2] . "/<span style='font-size:36px;font-weight:bold;'>" . $external[3] . "</span>";
                 } else {
-                    echo $detail['ca_no'];
+                    echo (isset($detail['ca_no'])) ? $detail['ca_no'] : '';
                 }
                 ?>
             </div>
