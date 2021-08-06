@@ -56,17 +56,25 @@
             width: 100%;
         }
 
-        .footer .text,
-        .footer .text.right {
-            width: 48%;
+        .footer .text {
+            width: 73%;
             display: inline-block;
         }
 
         .footer .text.right {
+            width: 25%;
             text-align: right;
+            display: inline-block;
         }
     </style>
 </head>
+<?php
+$external = explode('/', $detail['ca_no']);
+if (strlen(end($external)) === 4) {
+    $tipe = "CA";
+}
+// var_dump($external);
+?>
 
 <body>
     <div class="container">
@@ -78,13 +86,21 @@
             </div>
         </div>
         <div class="hero">
-            <h3><?php echo (isset($detail['kota'])) ? $detail['kota'] : '';  ?></h3>
+            <h3><?php echo (isset($detail['kota'])) ? $detail['kota'] . " | " . $detail['zona'] : '';  ?></h3>
         </div>
         <div class="body">
             <div class="heading">FROZEN</div>
         </div>
         <div class="footer">
-            <div class="text"><?= $detail['ca_no']; ?></div>
+            <div class="text">
+                <?php
+                if (isset($tipe) && $tipe === "CA") {
+                    echo $external[0] . "/" . $external[1] . "/" . $external[2] . "/<span style='font-size:36px;font-weight:bold;'>" . $external[3] . "</span>";
+                } else {
+                    echo $detail['ca_no'];
+                }
+                ?>
+            </div>
             <div class="text right">Q : <?= $detail['current']; ?> Koli</div>
         </div>
     </div>
