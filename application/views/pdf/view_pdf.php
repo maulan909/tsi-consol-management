@@ -72,9 +72,9 @@
 <?php
 if (isset($detail['ca_no'])) {
     $external = explode('/', $detail['ca_no']);
-}
-if (strlen(end($external)) === 4) {
-    $tipe = "CA";
+    if (strlen(end($external)) === 4) {
+        $tipe = "CA";
+    }
 }
 // var_dump($external);
 ?>
