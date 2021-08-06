@@ -49,6 +49,7 @@
         .body {
             text-align: center;
             font-size: 65px !important;
+            font-weight: bold;
             margin-bottom: 10px;
         }
 
