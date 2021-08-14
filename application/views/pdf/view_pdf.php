@@ -50,7 +50,7 @@
             text-align: center;
             font-size: 65px !important;
             font-weight: bold;
-            margin-bottom: 10px;
+            /* margin-bottom: 10px; */
         }
 
         .footer {
@@ -66,6 +66,10 @@
             width: 25%;
             text-align: right;
             display: inline-block;
+        }
+
+        .complete {
+            text-align: center;
         }
     </style>
 </head>
@@ -105,6 +109,13 @@ if (isset($detail['ca_no'])) {
                 ?>
             </div>
             <div class="text right">Q : <?= $detail['current']; ?> Koli</div>
+            <?php
+            if (isset($detail['picklist']) && isset($detail['consol'])  && ($detail['consol'] + 1) == $detail['picklist']) {
+            ?>
+                <div class="complete">Complete <?= $detail['koli'] + $detail['current']; ?> Koli</div>
+
+            <?php
+            } ?>
         </div>
     </div>
 </body>
