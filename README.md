@@ -1,2 +1,3 @@
 # tsi-consol-management
-Aplikasi Monitoring untuk penggabungan Paket di TaniSupply Indonesia
+<h2>Aplikasi Monitoring untuk penggabungan Paket di TaniSupply Indonesia</h2>
+Aplikasi ini adalah hasil kolaborasi saya dengan seorang karyawan dari PT. TaniSupply Indonesia, atau perusahaan yang lebih dikenal dengan platform E-Commerce Tanihub, sistem ini digunakan untuk deteksi item-item yang sudah dipersiapkan oleh tim helper (picker dan packer) dari chamber berbeda untuk gabungkan. dengan sistem ini, tim Consol akan lebih mudah mengidentifikasi sebuah Paket orderan customer sudah lengkap atau memiliki kekurangan, sehingga dengan sistem ini diharapkan memudahkan identifikasi dan penggabungan paket untuk mempercepat proses pengiriman atau delivery ke customer.
