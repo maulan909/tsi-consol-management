@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    console.log('https://github.com/maulan909');
     var pdf = {};
     //ajax location
     $("#palet_no").on('keyup', function () {
