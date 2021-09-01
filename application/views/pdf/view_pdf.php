@@ -16,7 +16,7 @@
         }
 
         .container {
-            margin: 10px 10px;
+            margin: 10px 10px 10px 60px;
             width: 100%;
             border: 3px solid black;
             padding: 10px 5px;
